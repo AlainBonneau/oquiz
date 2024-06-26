@@ -1,0 +1,9 @@
+# Variables d'environnement
+.env
+
+# Node modules
+node_modules/
+
+
+# Fichiers OS
+.DS_Store

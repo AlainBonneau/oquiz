@@ -1,0 +1,47 @@
+<!-- <pre><code><%# JSON.stringify(quiz, null, 2) %></code></pre> -->
+
+<%- include('./partials/header') %>
+
+<main class="container py-4">
+
+  <h1 class="text-center m-2"><%= quiz.title %></h1>
+
+  <h2 class="text-center m-2"><%= quiz.description %></h1>
+
+  <h2 class="small text-end">Par <%= quiz.author.fullname %></h2>
+
+  <h2 class="small text-end">Date de création : <%= quiz.localeCreationDate %></h2>
+  <!-- locale format : Jeudi 22 février 2022 -->
+
+  <h3>Thèmes</h3>
+  <ul class="mb-4 p-0">
+    <% quiz.tags.forEach(tag => { %>
+      <li class="badge bg-primary"><%= tag.name %></li>
+    <% }) %>
+  </ul>
+
+  <h3>Questions</h3>
+
+  <form action="/quiz/<%= quiz.id %>" method="POST">
+
+    <% quiz.questions.forEach(question => { %>
+     
+      <span class="badge bg-info"><%= question.level.name %></span>
+      <p class="fw-bold mb-1"><%= question.description %></p>
+      <div class="mb-3 ms-2">
+        <% question.propositions.forEach(proposition => { %>
+          <div>
+            <input type="radio" id="<%= proposition.id %>" name="<%= question.id %>" value="<%= proposition.id %>">
+            <label for="<%= proposition.id %>"><%= proposition.description %></label>
+          </div>
+        <% }) %>
+      </div>
+
+    <% }) %>
+  
+    <button class="d-block mx-auto btn btn-primary mb-4">Envoyer</button>
+
+  </form>
+</main>
+
+<%- include('./partials/footer') %>

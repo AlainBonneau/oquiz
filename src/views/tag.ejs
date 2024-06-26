@@ -1,0 +1,30 @@
+<!-- <pre><code><%# JSON.stringify(tags, null, 2) %></code></pre> -->
+
+<%- include('./partials/header') %>
+
+<main class="container py-4">
+
+  <h1>Thèmes</h1>
+
+  <% tags.forEach(tag => { %>
+
+      <span class="badge bg-primary p-2 mb-1"><%= tag.name %></span>
+
+      <% if (tag.quizzes.length === 0) { %>
+
+        <p class="ms-2">Aucun quizz dans cette catégorie pour le moment....</p>
+
+      <% } else { %>
+
+        <!-- Pour chaque quiz du tag.quizzes -->
+        <% tag.quizzes.forEach(quiz => { %>
+          <li><a href="/quiz/<%= quiz.id %>"><%= quiz.title %></a></li>
+        <% }) %> 
+
+      <% } %>
+
+  <% }) %>
+
+</main>
+
+<%- include('./partials/footer') %>

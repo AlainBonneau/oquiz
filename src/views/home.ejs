@@ -1,0 +1,38 @@
+<%- include('./partials/header') %>
+
+<main class="container py-4">
+
+    <!-- Accueil -->
+    <div class="text-center">
+        <h2 class="h1 my-4">Bienvenue sur O'Quiz</h2>
+        <p class="lead my-4">Découvrez l'excitation de l'apprentissage tout en mettant à l'épreuve vos connaissances grâce à notre collection de quiz minutieusement élaborés. Plongez-vous dans une expérience interactive où chaque question est une opportunité d'en apprendre davantage, de vous divertir et de vous challenger. Relevez le défi et explorez un monde de connaissances qui vous permettra de découvrir de nouveaux horizons et de développer votre esprit critique. Bienvenue dans O'quiz, là où le plaisir de l'apprentissage rencontre la stimulation intellectuelle !</p>
+    </div>
+
+    <!-- Cards -->
+    <div class="row mb-3 text-center flew-wrap">
+
+        <!-- One card -->
+        <% quizzes.forEach(quiz => { %>
+        <div class="col-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="h2"><%= quiz.title %></h3>
+                </div>
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h4 class="h3"><%= quiz.description %></h4>
+                    <p><%= quiz.author.fullname %></p>
+                    <ul class="list-unstyled mb-4 p-0">
+                        <% quiz.tags.forEach(tag => { %>
+                            <li class="badge bg-primary"><%= tag.name %></li>
+                        <% }); %>
+                    </ul>
+                    <a href="/quiz/<%= quiz.id %>" class="btn btn-lg btn-primary text-white">Jouer</a>
+                </div>
+            </div>
+        </div>
+        <% }) %> <!-- End of one card -->
+        
+    </div>
+</main>
+
+<%- include('./partials/footer') %>

@@ -1,0 +1,40 @@
+<!-- <pre><code><%# JSON.stringify(users, null, 2) %></code></pre> -->
+
+<%- include('./partials/header') %>
+
+<main class="container py-4">
+  <h1>Administration des utilisateurs</h1>
+
+  <ul>
+
+    <% users.forEach(user => { %>
+
+      <li class="mb-3">
+        <div class="card">
+          <div class="card-header">
+            <%= user.fullname %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= user.email %></h5>
+            <p class="card-text">Rôle actuel : <%= user.role %></p>
+  
+            <form method="POST" action="/admin/modify-role/users/<%= user.id %>" class="d-flex gap-3"> <!-- Par exemple -->
+              <select class="form-select" aria-label="Choix du rôle" name="role">
+                <option selected disabled>Choix du rôle</option>
+                <option value="member">Membre</option>
+                <option value="admin">Administrateur</option>
+              </select>
+              <button class="btn btn-primary">Modifier le rôle</button>
+            </form>
+          
+          </div>
+        </div>
+      </li>
+     
+    <% }) %>
+
+  </ul>
+
+</main>
+
+<%- include('./partials/footer') %>
