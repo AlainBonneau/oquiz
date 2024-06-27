@@ -6,9 +6,18 @@ const pgSession = require("connect-pg-simple")(session);
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false
+    rejectUnauthorized: false  // Utilisez false pour contourner les problèmes de certificat
   }
 });
+
+pool.connect()
+  .then(client => {
+    console.log('Connected to PostgreSQL database');
+    client.release();
+  })
+  .catch(err => {
+    console.error('Error connecting to PostgreSQL database', err);
+  });
 
 // Middleware de session
 const sessionMiddleware = session({
